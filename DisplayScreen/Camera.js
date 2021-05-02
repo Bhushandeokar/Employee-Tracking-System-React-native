@@ -50,7 +50,7 @@ const CameraScreeen = (props) => {
     })();
   }, []);
   const sendimg=()=>{
-    fetch("http://192.168.43.234:3000/send",{
+    fetch("http://192.168.0.106:3000/send",{
       method: 'POST',
       headers: {
           'Accept': 'application/json',
@@ -60,6 +60,7 @@ const CameraScreeen = (props) => {
           name:NamePass.name,
           password:NamePass.pass,
           date:NamePass.date,
+          LoginTime:NamePass.LoginTime,
           image:cur,
           lat:latitudeValue,
           lon:longitudeValue

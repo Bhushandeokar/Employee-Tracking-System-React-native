@@ -1,35 +1,55 @@
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 
-const empolyeeSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        require:true,
-        unique:true
-        
-    },
-    password:{
-        type:String,
-        require:true,
-        unique:true
-
-    },
-    information:[
-        {
-            date:{
-               type:String,
-            unique:true
-        },
-            image:String,
-            location:[
+const EmployeeSchema = new mongoose.Schema({
+    AllEmployee: [
+      {
+            CompanyName:{
+                type:String,
+                require: true
+            },
+            Username: {
+                type: String,
+                require: true,
+                unique: true
+            },
+            Password: {
+                type: String,
+                require: true,
+                unique: true
+            },
+            EmployeeName: {
+                type: String,
+                require: true,
+            },
+            EmployeeID: {
+                type: String,
+                require: true,
+                unique: true
+            },
+            information: [
                 {
-                    lat:Number,
-                    long:Number
+                    date: {
+                        type: String,
+                    },
+                     LoginTime: {
+                        type: String,
+                    },
+                     LogoutTime: {
+                        type: String,
+                    },
+                    image: String,
+                    location: [
+                        {
+                            lat: Number,
+                            long: Number
+                        }
+                    ]
                 }
             ]
         }
     ]
 })
 
-const Register= new mongoose.model("Register",empolyeeSchema);
+const CompanyEmployess = new mongoose.model("CompanyEmployee", EmployeeSchema);
 
-module.exports=Register;
+module.exports = CompanyEmployess;

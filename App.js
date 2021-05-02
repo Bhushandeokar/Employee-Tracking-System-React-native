@@ -51,7 +51,7 @@ export default function App() {
 
       if(latitudeValue!=0 && longitudeValue!=0){
 
-        fetch("http://192.168.43.234:3000/send",{
+        fetch("http://192.168.0.106:3000/send",{
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -66,7 +66,7 @@ export default function App() {
           })
       }) .then(res=>res.json()) 
     
-      }}, 500000);
+      }}, 5000);
     }
   const DisplayScreen=(Value)=>{
     SetScreen(Value);

@@ -1,19 +1,37 @@
 import React,{useState} from "react";
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView, ScrollViewComponent } from 'react-native';
 import { Ionicons, AntDesign, Entypo,Foundation,FontAwesome ,MaterialCommunityIcons,FontAwesome5} from '@expo/vector-icons';
+import Moment from 'moment';
+import { getNamePass } from '../prop/props';
 
 
 const Homescreen = (props) => {
   const [a,b]= useState(0)
+  let NamePass={};
+  NamePass=getNamePass()
+  
   let ScreenDispaly;
-      
+      const logout=()=>{
+        fetch("http://192.168.0.106:3000/send",{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name:NamePass.name,
+                password:NamePass.pass,
+                LogoutTime:Moment().format('h:mm:ss a'),
+                })
+        })
+      }
     return (
         <View>
             <View style={styles.TopView}>
                 <Text style={{ fontSize: 27, fontWeight: "bold" ,color:'white'}}>Home</Text>
                 <View style={{ flexDirection: 'row',paddingTop:8}}>
                     <Text style={{ fontSize: 17, fontWeight: 'bold' ,color:'white'}}>Log-out  </Text>
-                    <TouchableOpacity onPress={() => props.OnBack(0)}>
+                    <TouchableOpacity onPress={()=>{props.OnBack(0),logout()}}>
                         <Entypo name="log-out" size={28} color="white" />
                     </TouchableOpacity>
                 </View>

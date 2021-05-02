@@ -1,9 +1,10 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, View, StyleSheet, Keyboard, TouchableWithoutFeedback, Alert, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { setAttendance,setleaves,setNamePass } from '../prop/props';
 import Moment from 'moment';
+import Camera from '../DisplayScreen/Camera'
 
 const LoginScreen = (props) => {
     const [CurrUserName, SetUserName] = useState('');
@@ -11,12 +12,9 @@ const LoginScreen = (props) => {
     const [value, onChangeText] = useState(true);
     const [a, b] = useState(1)
     let eye;
-  ;
-  
-  
-
+    let d=5;
     const Login = () => {
-    fetch("http://192.168.43.234:3000/send",{
+        fetch("http://192.168.0.102:3000/send",{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -25,7 +23,6 @@ const LoginScreen = (props) => {
             body: JSON.stringify({
                 name:CurrUserName,
                 password:CurrentPass,
-             
             })
         })
         .then(res=>res.json()) 
@@ -34,7 +31,7 @@ const LoginScreen = (props) => {
         })
         .then((data)=>{
             if(data!=null){
-            if (CurrUserName == data.name && CurrentPass == data.password && CurrentPass.length != 0 && CurrUserName.length != 0) {
+            if (CurrUserName == data.Username && CurrentPass == data.Password && CurrentPass.length != 0 && CurrUserName.length != 0) {
                 props.OnDispaly(1) 
                 setAttendance(data.information)
             }}
@@ -71,7 +68,7 @@ const LoginScreen = (props) => {
                     </View>
 
                     <View style={styles.loginView}>
-                        <TouchableOpacity style={styles.LoginButton} title='Login' onPress={() =>{ Login(),setleaves(),setNamePass({name:CurrUserName,pass:CurrentPass,date:Moment().format("YYYY-MM-DD")})}} ><Text style={{ fontSize: 18, color: 'white' }}>Login</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.LoginButton} title='Login' onPress={() =>{ Login(),setleaves(),setNamePass({name:CurrUserName,pass:CurrentPass,date:Moment().format("YYYY-MM-DD,"),LoginTime:Moment().format('h:mm:ss a')})}} ><Text style={{ fontSize: 18, color: 'white' }}>Login</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
